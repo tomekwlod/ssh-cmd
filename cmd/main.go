@@ -9,6 +9,8 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
+	"strings"
 	"time"
 
 	"github.com/tomekwlod/utils"
@@ -58,7 +60,7 @@ func main() {
 
 	if sshpath == "" {
 
-		log.Fatal("No ssh path provived, expected SSH_PATH in env file")
+		log.Fatal("No ssh path provived, expected SSH_PATH in env file (where are your ssh files?)")
 	}
 
 	user := "root"
@@ -206,8 +208,15 @@ func executeCmd(command, addr, hostname string, config *ssh.ClientConfig) string
 	session.Stdout = &stdoutBuf
 	session.Run(command)
 
-	// return fmt.Sprintf("%s -> %s", hostname, stdoutBuf.String())
-	return fmt.Sprintf("%s -> %s", hostname, stdoutBuf.String())
+	perc, _ := strconv.Atoi(strings.Trim(stdoutBuf.String(), "\t \n"))
+
+	alertSign := "\t"
+	if perc >= 80 {
+		alertSign = "!!\t"
+
+	}
+
+	return fmt.Sprintf("%s %s -> %s", alertSign, hostname, stdoutBuf.String())
 }
 
 func servers() (d RemoteEntities) {
