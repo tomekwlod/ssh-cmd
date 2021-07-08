@@ -53,7 +53,7 @@ func main() {
 
 	if len(s.Droplets) == 0 {
 
-		log.Fatal("No servers found, expected SERVERS in env file")
+		log.Fatal("No servers found")
 	}
 
 	sshpath := os.Getenv("SSH_PATH")
@@ -65,9 +65,9 @@ func main() {
 
 	user := "root"
 	// commands := []string{
-	// 	// "hostname",
-	// 	"df /home | awk '{ print $5 }' | tail -n 1 | sed 's/%//'",
-	// 	// "exit",
+	//      // "hostname",
+	//      "df /home | awk '{ print $5 }' | tail -n 1 | sed 's/%//'",
+	//      // "exit",
 	// }
 
 	result := make(chan string, 10)
@@ -140,52 +140,52 @@ func main() {
 }
 
 // type SignerContainer struct {
-// 	signers []ssh.Signer
+//      signers []ssh.Signer
 // }
 
 // func (t *SignerContainer) Key(i int) (key ssh.PublicKey, err error) {
-// 	if i >= len(t.signers) {
-// 		return
-// 	}
-// 	key = t.signers[i].PublicKey()
-// 	return
+//      if i >= len(t.signers) {
+//              return
+//      }
+//      key = t.signers[i].PublicKey()
+//      return
 // }
 // func (t *SignerContainer) Sign(i int, rand io.Reader, data []byte) (sig []byte, err error) {
-// 	if i >= len(t.signers) {
-// 		return
-// 	}
-// 	sig, err = t.signers[i].Sign(rand, data)
-// 	return
+//      if i >= len(t.signers) {
+//              return
+//      }
+//      sig, err = t.signers[i].Sign(rand, data)
+//      return
 // }
 
 // func makeSigner(keyname string) (signer ssh.Signer, err error) {
-// 	key, err := ioutil.ReadFile(filepath.FromSlash(keyname))
-// 	if err != nil {
-// 		log.Fatalf("unable to read private key: %v", err)
-// 	}
-// 	signer, err = ssh.ParsePrivateKey(key)
+//      key, err := ioutil.ReadFile(filepath.FromSlash(keyname))
+//      if err != nil {
+//              log.Fatalf("unable to read private key: %v", err)
+//      }
+//      signer, err = ssh.ParsePrivateKey(key)
 
-// 	if err != nil {
+//      if err != nil {
 
-// 		return nil, err
-// 	}
+//              return nil, err
+//      }
 
-// 	return
+//      return
 // }
 
 // func makeKeyring() ssh.AuthMethod {
-// 	// signer := ssh.Signer{}
-// 	key := "/Users/youruser/.ssh/id_rsa"
+//      // signer := ssh.Signer{}
+//      key := "/Users/youruser/.ssh/id_rsa"
 
-// 	// for _, keyname := range keys {
-// 	signer, err := makeSigner(key)
-// 	if err != nil {
-// 		panic(err)
-// 	}
-// 	// }
+//      // for _, keyname := range keys {
+//      signer, err := makeSigner(key)
+//      if err != nil {
+//              panic(err)
+//      }
+//      // }
 
-// 	return ssh.PublicKeys(signer)
-// 	// return ssh.ClientAuthKeyring(&SignerContainer{signers})
+//      return ssh.PublicKeys(signer)
+//      // return ssh.ClientAuthKeyring(&SignerContainer{signers})
 // }
 
 func executeCmd(command, addr, hostname string, config *ssh.ClientConfig) string {
@@ -240,7 +240,7 @@ func servers() (d RemoteEntities) {
 
 	// bb, err := utils.BodyToString(res.Body)
 	// if err != nil {
-	// 	log.Fatal(err)
+	//      log.Fatal(err)
 	// }
 	// fmt.Println("bb->", bb)
 
@@ -253,7 +253,7 @@ func servers() (d RemoteEntities) {
 
 	// rr, err := utils.PrettyJson(d)
 	// if err != nil {
-	// 	log.Fatal(err)
+	//      log.Fatal(err)
 	// }
 	// fmt.Println("rr->", rr)
 
